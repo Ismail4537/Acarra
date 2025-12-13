@@ -15,3 +15,6 @@ Route::get('event/{slug}', [EventController::class, 'show'])->name('event.show')
 Route::get('/dashboard', function () {
     return view('dashboard.home');
 });
+Route::get('/profile', function () {
+    return view('profile');
+});
