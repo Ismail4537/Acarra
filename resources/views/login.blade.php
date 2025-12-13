@@ -13,6 +13,18 @@
             <h1 class="text-3xl font-bold text-slate-800 mb-2">Selamat Datang!</h1>
             <p class="text-slate-500 text-sm">Masukan email dan password </p>
         </div>
+
+        <form action="/login" method="POST" class="px-8 pb-8 space-y-5">
+            @csrf
+            <div>
+                <label class="block text-sm font-medium text-slate-700 mb-1">Email Address</label>
+                <input type="email" name="email" class="w-full px-4 py-3 rounded-lg bg-slate-50 border border-slate-200 focus:ring-2 focus:ring-indigo-500">
+            </div>
+            <div>
+                <label class="block text-sm font-medium text-slate-700 mb-1">Password</label>
+                <input type="password" name="password" class="w-full px-4 py-3 rounded-lg bg-slate-50 border border-slate-200 focus:ring-2 focus:ring-indigo-500">
+            </div>
+            </form>
         </div>
 
 </body>
