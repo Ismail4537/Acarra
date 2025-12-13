@@ -24,6 +24,16 @@
                 <label class="block text-sm font-medium text-slate-700 mb-1">Password</label>
                 <input type="password" name="password" class="w-full px-4 py-3 rounded-lg bg-slate-50 border border-slate-200 focus:ring-2 focus:ring-indigo-500">
             </div>
+
+            <button type="submit" 
+                class="w-full py-3 px-4 bg-indigo-600 hover:bg-indigo-700 text-white font-bold rounded-lg shadow-lg shadow-indigo-200 transition transform hover:-translate-y-0.5">
+                Masuk Sekarang
+            </button>
+
+            <div class="text-center mt-6 text-sm text-slate-500">
+                Belum punya akun? 
+                <a href="/register" class="font-bold text-indigo-600 hover:text-indigo-800 transition">Daftar di sini</a>
+            </div>
             </form>
         </div>
 
