@@ -4,6 +4,8 @@
 </header>
 
 <body>
+
+
     <div class="relative overflow-x-auto bg-neutral-primary-soft shadow-xs rounded-base border border-default">
 
         <!-- Search, Create, Filter -->
@@ -60,8 +62,10 @@
             <thead class="bg-neutral-secondary-medium border-b border-default-medium">
                 <tr>
                     <th class="px-6 py-3 font-medium text-center">No</th>
-                    <th class="px-6 py-3 font-medium">Nama Category</th>
-
+                    <th class="px-6 py-3 font-medium">Judul Event</th>
+                    <th class="px-6 py-3 font-medium">Kategori</th>
+                    <th class="px-6 py-3 font-medium">Jadwal</th>
+                    <th class="px-6 py-3 font-medium">Status</th>
 
                     <!-- 🔥 Tambahan kolom AKSI -->
                     <th class="px-6 py-3 font-medium text-center">Aksi</th>
@@ -72,8 +76,10 @@
 
                 <tr class="bg-neutral-primary-soft border-b border-default hover:bg-neutral-secondary-medium">
                     <td class="px-6 py-4 text-center">1</td>
-                    <td class="px-6 py-4">Barang 1</td>
-
+                    <td class="px-6 py-4">Konfrensi</td>
+                    <td class="px-6 py-4">Teknologi</td>
+                    <td class="px-6 py-4">2025-10-20 09:00 / 2025-10-20 17:00</td>
+                    <td class="px-6 py-4">Scheduled</td>
 
                     <!-- Aksi -->
                     <td class="px-6 py-4 text-center">
@@ -84,8 +90,10 @@
 
                 <tr class="bg-neutral-primary-soft border-b border-default hover:bg-neutral-secondary-medium">
                     <td class="px-6 py-4 text-center">2</td>
-                    <td class="px-6 py-4">Barang 2</td>
-
+                    <td class="px-6 py-4">Lomba</td>
+                    <td class="px-6 py-4">Olahraga</td>
+                    <td class="px-6 py-4">2025-10-20 08:00 / 2025-10-20 16:00</td>
+                    <td class="px-6 py-4">Completed</td>
 
                     <!-- Aksi -->
                     <td class="px-6 py-4 text-center">
@@ -96,8 +104,10 @@
 
                 <tr class="bg-neutral-primary-soft hover:bg-neutral-secondary-medium">
                     <td class="px-6 py-4 text-center">3</td>
-                    <td class="px-6 py-4">Barang 3</td>
-
+                    <td class="px-6 py-4">Workshop</td>
+                    <td class="px-6 py-4">Desain</td>
+                    <td class="px-6 py-4">2025-10-20 10:00 / 2025-10-20 17:00</td>
+                    <td class="px-6 py-4">Ongoing</td>
 
                     <!-- Aksi -->
                     <td class="px-6 py-4 text-center">
@@ -119,8 +129,6 @@
         </div>
 
     </div>
-
-
 
 
 </body>
