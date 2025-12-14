@@ -42,6 +42,48 @@
         </div>
 
         </div>
+
+        <div class="bg-slate-50 py-20 mt-10">
+        <div class="max-w-7xl mx-auto px-6 lg:px-8">
+            
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <h2 class="text-base text-indigo-600 font-semibold tracking-wide uppercase">Our Mission</h2>
+                <p class="mt-2 text-3xl font-extrabold text-slate-900">Excepteur sint occaecat cupidatat</p>
+                <p class="mt-4 text-xl text-slate-500">
+                    Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
+                
+                <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-100">
+                    <div class="w-12 h-12 bg-indigo-100 rounded-lg flex items-center justify-center mb-6">
+                        <span class="text-indigo-600 font-bold text-xl">1</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-900 mb-3">Lorem Ipsum</h3>
+                    <p class="text-slate-500">Duis aute irure dolor in reprehenderit in voluptate velit esse cillum.</p>
+                </div>
+
+                <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-100">
+                    <div class="w-12 h-12 bg-indigo-100 rounded-lg flex items-center justify-center mb-6">
+                        <span class="text-indigo-600 font-bold text-xl">2</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-900 mb-3">Dolor Sit Amet</h3>
+                    <p class="text-slate-500">Excepteur sint occaecat cupidatat non proident, sunt in culpa.</p>
+                </div>
+
+                <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-100">
+                    <div class="w-12 h-12 bg-indigo-100 rounded-lg flex items-center justify-center mb-6">
+                        <span class="text-indigo-600 font-bold text-xl">3</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-900 mb-3">Consectetur</h3>
+                    <p class="text-slate-500">Sed ut perspiciatis unde omnis iste natus error sit voluptatem.</p>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
     
     </body>
 </html>
