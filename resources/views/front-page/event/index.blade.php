@@ -19,9 +19,14 @@
         @foreach ($listevent as $event)
         <a href="{{ route('event.show', ['slug' => $event['slug']]) }}">
         <div class="border border-gray-300 w-full max-w-xs bg-white rounded-xl shadow-lg overflow-hidden h-full flex flex-col">    
+
             {{-- Gambar --}}
             <div class="relative h-32 sm:h-42"> 
-                <img src="{{ $event['image_path'] }}" alt="{{ $event['title'] }}" class="w-full h-full object-cover rounded-t-xl">
+                @if ($event['image_path'] != null)
+                    <img src="{{ $event['image_path'] }}" alt="{{ $event['title'] }}" class="w-full h-full object-cover rounded-t-xl">
+                @else
+                    <img src="{{ asset('Image/Preview.jpg') }}" alt="{{ $event['title'] }}" class="w-full h-full object-cover rounded-t-xl">
+                @endif
             </div>
 
             {{-- Deskripsi --}}
@@ -33,7 +38,7 @@
                     {{-- Kategori --}}
                     <div class="flex items-center">
                         <svg class="w-4 h-4 text-gray-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.568 3H5.25A2.25 2.25 0 003 5.25v4.318c0 .597.237 1.17.659 1.591l9.581 9.581c.699.699 1.78.872 2.607.33a18.095 18.095 0 005.223-5.223c.542-.827.369-1.908-.33-2.607L11.16 3.66A2.25 2.25 0 009.568 3z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 6h.008v.008H6V6z"></path></svg>
-                        <span>{{ $event['category_id'] }}</span>
+                        <span>{{ $event->category->name }}</span>
                     </div>
                     {{-- Tanggal dan Waktu --}}
                     <div class="flex items-center">
@@ -48,7 +53,13 @@
                     {{-- Harga --}}
                     <div class="flex items-center">
                         <svg class="w-4 h-4 text-gray-500 mr-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6v12m-3-2.818.879.659c1.171.879 3.07.879 4.242 0 1.172-.879 1.172-2.303 0-3.182C13.536 12.219 12.768 12 12 12c-.725 0-1.45-.22-2.003-.659-1.106-.879-1.106-2.303 0-3.182s2.9-.879 4.006 0l.415.33M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" /></svg>
-                        <span>{{ $event['price'] }}</span>
+                        <span>
+                            @if ($event['price'] == 0)
+                                FREE
+                            @else
+                                Rp,{{ $event['price'] }},-
+                            @endif
+                        </span>
                     </div>
                 </div>
             </div>

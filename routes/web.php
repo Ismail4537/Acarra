@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\EventController;
+use App\Http\Controllers\ProfileController;
 
 Route::get('/', function () {
     return view('front-page.home', ["title" => "Home"]);
@@ -11,9 +12,7 @@ Route::get('/about', function () {
     return view('front-page.about', ["title" => "About"]);
 })->name('about');
 
-Route::get('/profile', function () {
-    return view('front-page.profile', ["title" => "Profile"]);
-})->name('profile');
+Route::get('/profile', [ProfileController::class, 'index'])->middleware('auth')->name('profile');
 
 // Rute untuk Index (event.index)
 Route::get('event', [EventController::class, 'index'])->name('event.index');
@@ -35,7 +34,6 @@ Route::get('/dashboard/categories', function () {
 Route::get('/dashboard/users', function () {
     return view('dashboard.users');
 });
-
 
 Route::get('/login', function () {
     return view('login');
