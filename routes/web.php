@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\EventController;
+use App\Http\Controllers\Auth\RegisteredUserController;
+use App\Http\Controllers\Auth\LoginController;
 
 Route::get('/', function () {
     return view('front-page.home', ["title" => "Home"]);
@@ -37,10 +39,9 @@ Route::get('/dashboard/users', function () {
 });
 
 
-Route::get('/login', function () {
-    return view('login');
-})->name('login');
+Route::get('/login', [LoginController::class, 'create'])->name('login');
+Route::post('/login', [LoginController::class, 'store']);
+Route::post('/logout', [LoginController::class, 'destroy'])->name('logout');
 
-Route::get('/register', function () {
-    return view('register');
-})->name('register');
+Route::get('/register', [RegisteredUserController::class, 'create'])->name('register');
+Route::post('/register', [RegisteredUserController::class, 'store']);
