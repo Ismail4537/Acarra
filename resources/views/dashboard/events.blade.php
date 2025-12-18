@@ -315,7 +315,7 @@
 
                 // HTML BARIS BARU (Udah dibenerin class-nya biar gak kedip & ukurannya sama)
                 const newRow = `
-                    <tr class="bg-neutral-primary-soft border-b border-default hover:bg-neutral-secondary-medium transition-colors">
+                    <tr class="bg-neutral-primary-soft border-b border-black-200 hover:bg-neutral-secondary-medium transition-colors">
                         <td class="px-6 py-4 text-center">${newNo}</td>
                         <td class="px-6 py-4 font-medium text-heading">${title}</td>
                         <td class="px-6 py-4">${category}</td>

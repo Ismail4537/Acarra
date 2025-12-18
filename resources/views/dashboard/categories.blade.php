@@ -62,7 +62,6 @@
                     <th class="px-6 py-3 font-medium text-center">No</th>
                     <th class="px-6 py-3 font-medium">Nama</th>
 
-                    <!-- 🔥 Tambahan kolom AKSI -->
                     <th class="px-6 py-3 font-medium text-center">Aksi</th>
                 </tr>
             </thead>
@@ -301,7 +300,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 
                 // HTML Baris Baru
                 const newRowHTML = `
-                    <tr class="bg-neutral-primary-soft border-b border-default hover:bg-neutral-secondary-medium transition-colors">
+                    <tr class="bg-neutral-primary-soft border-b border-black-200 hover:bg-neutral-secondary-medium transition-colors">
                         <td class="px-6 py-4 text-center">${newNo}</td>
                         <td class="px-6 py-4 font-medium text-heading">${newName}</td>
                         <td class="px-6 py-4 text-center">
