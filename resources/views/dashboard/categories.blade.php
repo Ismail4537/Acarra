@@ -75,7 +75,9 @@
 
                     <!-- Aksi -->
                     <td class="px-6 py-4 text-center">
-                        <button class="text-brand font-medium hover:underline mr-4">Update</button>
+                        <button onclick="openEditModal(this)" class="text-brand font-medium hover:underline mr-4">
+                            Update
+                        </button>
                         <button class="text-red-600 font-medium hover:underline">Delete</button>
                     </td>
                 </tr>
@@ -132,7 +134,7 @@
                 </div>
 
                 <form id="formCreateCategory" class="p-6 space-y-5">
-                    
+                    <input type="hidden" id="editRowIndex" value="">
                     <div>
                         <label for="categoryName" class="block text-sm font-semibold text-gray-700 mb-1">Nama Kategori</label>
                         <input type="text" id="categoryName" required placeholder="Contoh: Otomotif" 
@@ -174,83 +176,148 @@
 </div>
 
 <script>
-    // --- SETUP ELEMENT ---
-    const modal = document.getElementById('createCategoryModal');
-    const btnOpen = document.getElementById('btnCreateCategory');
-    const btnClose = document.getElementById('btnCloseModal');
-    const btnCancel = document.getElementById('btnCancelModal');
-    const form = document.getElementById('formCreateCategory');
+document.addEventListener('DOMContentLoaded', function() {
     
-    // Element Input
-    const inputName = document.getElementById('categoryName');
-    const inputSlug = document.getElementById('categorySlug');
-    const inputDesc = document.getElementById('categoryDesc');
-    const tableBody = document.querySelector('tbody');
+    // 1. SETUP VARIABEL & ELEMENT
+    
+    console.log("Script Categories Dimuat! "); 
 
-    // Toast
-    const toast = document.getElementById('toastSuccess');
+    const modal       = document.getElementById('createCategoryModal');
+    const form        = document.getElementById('formCreateCategory');
+    const tableBody   = document.querySelector('tbody');
+    const toast       = document.getElementById('toastSuccess');
+    
+    // Tombol
+    const btnOpen     = document.getElementById('btnCreateCategory'); // Tombol Create
+    const btnClose    = document.getElementById('btnCloseModal');     // Tombol X
+    const btnCancel   = document.getElementById('btnCancelModal');    // Tombol Batal
 
-    // --- FUNGSI BUKA/TUTUP MODAL ---
+    // Input Form
+    const inputName     = document.getElementById('categoryName');
+    const inputSlug     = document.getElementById('categorySlug');
+    const inputDesc     = document.getElementById('categoryDesc'); 
+    const inputRowIndex = document.getElementById('editRowIndex');
+    const modalTitle    = document.getElementById('modal-title');
+
+    
+    // 2. FUNGSI BANTUAN
+    
+    
+    // Buka/Tutup Modal
     const toggleModal = () => {
-        modal.classList.toggle('hidden');
+        if(modal) {
+            modal.classList.toggle('hidden');
+        } else {
+            console.error("Modal gak ketemu bang!");
+        }
+    };
+
+    // Munculin Toast
+    const showToast = () => {
+        if(toast) {
+            toast.classList.remove('hidden', 'translate-x-full');
+            setTimeout(() => {
+                toast.classList.add('translate-x-full');
+                setTimeout(() => toast.classList.add('hidden'), 300);
+            }, 3000);
+        }
+    };
+
+    // Bikin Slug Otomatis
+    const generateSlug = (text) => {
+        return text.toString().toLowerCase()
+            .replace(/\s+/g, '-')
+            .replace(/[^\w\-]+/g, '')
+            .replace(/\-\-+/g, '-')
+            .replace(/^-+/, '')
+            .replace(/-+$/, '');
+    };
+
+    // 3. EVENT LISTENERS
+
+    // A. TOMBOL CREATE (Buka Modal Kosong)
+    if(btnOpen) {
+        btnOpen.addEventListener('click', () => {
+            console.log("Tombol Create Diklik!"); // Debugging
+            form.reset();               
+            if(inputSlug) inputSlug.value = "";       
+            if(inputRowIndex) inputRowIndex.value = "";   
+            if(modalTitle) modalTitle.innerText = "Tambah Kategori Baru"; 
+            toggleModal();
+        });
+    } else {
+        console.error("Tombol Create (btnCreateCategory) gak ketemu!");
     }
 
-    if(btnOpen) btnOpen.addEventListener('click', () => {
-        form.reset(); // Kosongkan form pas dibuka
-        inputSlug.value = ""; // Reset slug
-        toggleModal();
-    });
-    
+    // B. TOMBOL CLOSE & CANCEL
     if(btnClose) btnClose.addEventListener('click', toggleModal);
     if(btnCancel) btnCancel.addEventListener('click', toggleModal);
+    
+    // C. AUTO SLUG (Pas ngetik nama)
+    if(inputName) {
+        inputName.addEventListener('input', function() {
+            if(inputSlug) inputSlug.value = generateSlug(this.value);
+        });
+    }
 
-    // --- FITUR AUTO SLUG ---
-    // Bikin slug otomatis dari nama (Spasi jadi strip, huruf kecil semua)
-    inputName.addEventListener('input', function() {
-        const slug = this.value.toLowerCase()
-            .replace(/ /g, '-')
-            .replace(/[^\w-]+/g, '');
-        inputSlug.value = slug;
-    });
-
-    // --- LOGIC SIMPAN (CREATE) ---
-    form.addEventListener('submit', function(e) {
-        e.preventDefault(); // Jangan refresh halaman
-
-        // Ambil Data
-        const name = inputName.value;
-        const slug = inputSlug.value;
-        const desc = inputDesc.value;
+    // D. TOMBOL UPDATE (Dipanggil dari HTML onclick)
+    window.openEditModal = (button) => {
+        console.log("Tombol Update Diklik!");
+        const row = button.closest('tr');
         
-        // Hitung Nomor Urut
-        const newNo = tableBody.rows.length + 1;
+        // Ambil Data Nama (Kolom ke-2)
+        const currentName = row.cells[1].innerText;
+        
+        // Isi ke Form
+        if(inputName) inputName.value = currentName;
+        if(inputSlug) inputSlug.value = generateSlug(currentName);
+        if(inputRowIndex) inputRowIndex.value = row.rowIndex; 
+        
+        // Kosongin desc (karena gak ada kolomnya)
+        if(inputDesc) inputDesc.value = ""; 
 
-        // Bikin Baris Baru (HTML)
-        // Style disamain: bg-neutral-primary-soft (atau sesuaikan dengan tabel lu)
-        const newRow = `
-            <tr class="bg-neutral-primary-soft border-b border-default hover:bg-neutral-secondary-medium transition-colors">
-                <td class="px-6 py-4 text-center">${newNo}</td>
-                <td class="px-6 py-4 font-medium text-heading">${name}</td>
-                
-                <td class="px-6 py-4 text-center">
-                    <button class="text-brand font-medium hover:underline mr-4">Update</button>
-                    <button class="text-red-600 font-medium hover:underline" onclick="this.closest('tr').remove()">Delete</button>
-                </td>
-            </tr>
-        `;
-
-        // Masukin ke Tabel
-        tableBody.insertAdjacentHTML('beforeend', newRow);
-
-        // Munculin Notif
-        toast.classList.remove('hidden', 'translate-x-full');
-        setTimeout(() => {
-            toast.classList.add('translate-x-full');
-            setTimeout(() => toast.classList.add('hidden'), 300);
-        }, 3000);
-
+        if(modalTitle) modalTitle.innerText = "Edit Kategori";
         toggleModal();
-        form.reset();
-    });
+    };
+
+    // E. SIMPAN DATA (SUBMIT)
+    if(form) {
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+            console.log("Form Disubmit!");
+
+            const newName = inputName.value;
+            const targetIndex = inputRowIndex.value;
+
+            if (targetIndex) {
+                // === MODE EDIT (UPDATE) ===
+                const row = document.querySelector('table').rows[targetIndex];
+                if(row) {
+                    row.cells[1].innerText = newName;
+                }
+            } else {
+                // === MODE CREATE (BARU) ===
+                const newNo = tableBody.rows.length + 1;
+                
+                // HTML Baris Baru
+                const newRowHTML = `
+                    <tr class="bg-neutral-primary-soft border-b border-default hover:bg-neutral-secondary-medium transition-colors">
+                        <td class="px-6 py-4 text-center">${newNo}</td>
+                        <td class="px-6 py-4 font-medium text-heading">${newName}</td>
+                        <td class="px-6 py-4 text-center">
+                            <button onclick="openEditModal(this)" class="text-indigo-600 font-medium hover:underline mr-4">Update</button>
+                            <button class="text-red-600 font-medium hover:underline" onclick="this.closest('tr').remove()">Delete</button>
+                        </td>
+                    </tr>
+                `;
+                tableBody.insertAdjacentHTML('beforeend', newRowHTML);
+            }
+
+            showToast();
+            toggleModal();
+            form.reset();
+        });
+    }
+});
 </script>
 </body>
