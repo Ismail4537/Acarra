@@ -40,22 +40,35 @@
                 </tr>
             </thead>
             <tbody>
-                <tr class="bg-neutral-primary-soft border-b border-default hover:bg-neutral-secondary-medium transition-colors">
-                    <td class="px-6 py-4 text-center">1</td>
-                    <td class="px-6 py-4">Raisa Andini</td>
-                    <td class="px-6 py-4">raisa@gmail.com</td>
-                    <td class="px-6 py-4">08123456789</td>
-                    <td class="px-6 py-4">2000-03-12</td>
-                    <td class="px-6 py-4">foto1.jpg</td>
-                    <td class="px-6 py-4">Admin</td>
-                    <td class="px-6 py-4 text-center">
-                        <button type="button" onclick="openEditModal(this)" 
-                            data-name="Raisa Andini" data-email="raisa@gmail.com" 
-                            data-phone="08123456789" data-dob="2000-03-12" data-role="Admin"
-                            class="text-brand font-medium hover:underline mr-4">Update</button>
-                        <button class="text-red-600 font-medium hover:underline" onclick="this.closest('tr').remove()">Delete</button>
-                    </td>
-                </tr>
+
+                @forelse($users ?? [] as $index => $user)
+                    <tr class="bg-neutral-primary-soft border-b border-default hover:bg-neutral-secondary-medium">
+                        <td class="px-6 py-4 text-center">{{ $index + 1 }}</td>
+                        <td class="px-6 py-4">{{ $user->name }}</td>
+                        <td class="px-6 py-4">{{ $user->email }}</td>
+                        <td class="px-6 py-4">{{ $user->phone ?? '-' }}</td>
+                        <td class="px-6 py-4">{{ optional($user->date_of_birth)->format('d/m/Y') ?? '-' }}</td>
+                        <td class="px-6 py-4">{{ $user->profile_photo_path ?? '-' }}</td>
+                        <td class="px-6 py-4">{{ $user->role ?? 'User' }}</td>
+
+                        <!-- Aksi -->
+                        <td class="px-6 py-4 text-center">
+                            <a href="{{ route('dashboard.users.edit', $user->id) }}"
+                                class="text-brand font-medium hover:underline mr-4">Update</a>
+
+                            <form action="{{ route('dashboard.users.destroy', $user->id) }}" method="POST"
+                                class="inline" onsubmit="return confirm('Yakin hapus?')">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="text-red-600 font-medium hover:underline">Delete</button>
+                            </form>
+                        </td>
+                    </tr>
+                @empty
+                    <tr>
+                        <td colspan="8" class="px-6 py-4 text-center">Tidak ada data pengguna.</td>
+                    </tr>
+                @endforelse
             </tbody>
         </table>
 

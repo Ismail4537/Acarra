@@ -5,7 +5,9 @@
 
 <body>
 
+
     <div class="relative overflow-x-auto bg-neutral-primary-soft shadow-xs rounded-base border border-default">
+
         <!-- Search, Create, Filter -->
         <div class="p-4 flex items-center justify-between">
 
@@ -68,6 +70,8 @@
                     <th class="px-6 py-3 font-medium">Kategori</th>
                     <th class="px-6 py-3 font-medium">Jadwal</th>
                     <th class="px-6 py-3 font-medium">Status</th>
+
+                    <!-- Tambahan kolom AKSI -->
                     <th class="px-6 py-3 font-medium text-center">Aksi</th>
                 </tr>
             </thead>
@@ -132,6 +136,7 @@
                         <button class="text-red-600 font-medium hover:underline">Delete</button>
                     </td>
                 </tr>
+
             </tbody>
         </table>
 
@@ -141,7 +146,9 @@
             <button class="border px-3 py-1 rounded bg-neutral-secondary-medium">1</button>
             <button class="border px-3 py-1 rounded hover:bg-neutral-secondary-medium">2</button>
             <button class="border px-3 py-1 rounded hover:bg-neutral-secondary-medium">&gt;</button>
+
         </div>
+
     </div>
 
     
