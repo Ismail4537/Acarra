@@ -5,7 +5,9 @@
 
 <body>
 
+
     <div class="relative overflow-x-auto bg-neutral-primary-soft shadow-xs rounded-base border border-default">
+
         <!-- Search, Create, Filter -->
         <div class="p-4 flex items-center justify-between">
 
@@ -61,10 +63,15 @@
             <thead class="bg-neutral-secondary-medium border-b border-default-medium">
                 <tr>
                     <th class="px-6 py-3 font-medium text-center">No</th>
+                    <th class="px-6 py-3 font-medium">Event Photo</th>
                     <th class="px-6 py-3 font-medium">Judul Event</th>
+                    <th class="px-6 py-3 font-medium">Lokasi Event</th>
+                    <th class="px-6 py-3 font-medium">Deskripsi Event</th>
                     <th class="px-6 py-3 font-medium">Kategori</th>
                     <th class="px-6 py-3 font-medium">Jadwal</th>
                     <th class="px-6 py-3 font-medium">Status</th>
+
+                    <!-- Tambahan kolom AKSI -->
                     <th class="px-6 py-3 font-medium text-center">Aksi</th>
                 </tr>
             </thead>
@@ -73,7 +80,12 @@
 
                 <tr class="bg-neutral-primary-soft border-b border-default hover:bg-neutral-secondary-medium">
                     <td class="px-6 py-4 text-center">1</td>
+                    <td class="px-6 py-4 text-center">
+                        <img src="" alt="foto event" class="w-16 h-10 object-cover mx-auto rounded-md">
+                    </td>
                     <td class="px-6 py-4">Konferensi meja bundar</td>
+                    <td class="px-6 py-4">Jln.toraya</td>
+                    <td class="px-6 py-4">Meja bundar-bundar</td>
                     <td class="px-6 py-4">Politik</td>
                     <td class="px-6 py-4">2025-12-01 09:00 / 2025-12-01 17:00</td>
                     <td class="px-6 py-4">Ongoing</td>
@@ -89,7 +101,12 @@
 
                 <tr class="bg-neutral-primary-soft border-b border-default hover:bg-neutral-secondary-medium">
                     <td class="px-6 py-4 text-center">2</td>
+                    <td class="px-6 py-4 text-center">
+                        <img src="" alt="foto event" class="w-16 h-10 object-cover mx-auto rounded-md">
+                    </td>
                     <td class="px-6 py-4">Workshop wpu</td>
+                    <td class="px-6 py-4">Jln.toraya</td>
+                    <td class="px-6 py-4">Meja bundar-bundar</td>
                     <td class="px-6 py-4">Teknologi</td>
                     <td class="px-6 py-4">2025-12-02 10:00 / 2025-12-02 16:00</td>
                     <td class="px-6 py-4">Scheduled</td>
@@ -103,7 +120,12 @@
 
                 <tr class="bg-neutral-primary-soft hover:bg-neutral-secondary-medium">
                     <td class="px-6 py-4 text-center">3</td>
+                    <td class="px-6 py-4 text-center">
+                        <img src="" alt="foto event" class="w-16 h-10 object-cover mx-auto rounded-md">
+                    </td>
                     <td class="px-6 py-4">Webinar Seraton</td>
+                    <td class="px-6 py-4">Jln.toraya</td>
+                    <td class="px-6 py-4">Meja bundar-bundar</td>
                     <td class="px-6 py-4">Teknologi</td>
                     <td class="px-6 py-4">2025-12-03 11:00 / 2025-12-03 15:00</td>
                     <td class="px-6 py-4">Canceled</td>
@@ -114,6 +136,7 @@
                         <button class="text-red-600 font-medium hover:underline">Delete</button>
                     </td>
                 </tr>
+
             </tbody>
         </table>
 
@@ -123,7 +146,9 @@
             <button class="border px-3 py-1 rounded bg-neutral-secondary-medium">1</button>
             <button class="border px-3 py-1 rounded hover:bg-neutral-secondary-medium">2</button>
             <button class="border px-3 py-1 rounded hover:bg-neutral-secondary-medium">&gt;</button>
+
         </div>
+
     </div>
 
     
@@ -155,6 +180,17 @@
                         <input type="text" id="eventTitle" required placeholder="Contoh: Webinar Teknologi" 
                             class="block w-full px-3 py-2 bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-2 focus:ring-indigo-500 outline-none">
                     </div>
+                    <div>
+                        <label for="eventLocation" class="block text-sm font-semibold text-gray-700 mb-1">Lokasi Event</label>
+                        <input type="text" id="eventLocation" required 
+                            class="block w-full px-3 py-2 bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-2 focus:ring-indigo-500 outline-none">
+                    </div>
+                    <div>
+                        <label for="eventDescription" class="block text-sm font-semibold text-gray-700 mb-1">Deskripsi</label>
+                        <textarea name="eventDescription" id="eventDescription" required
+                            class="block w-full px-3 py-2 bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-2 focus:ring-indigo-500 outline-none" rows="4" placeholder="Deskripsikan event Anda..."
+                        ></textarea>
+                    </div>
 
                     <div class="grid grid-cols-2 gap-4">
                         <div>
@@ -185,6 +221,11 @@
                             <label class="block text-sm font-semibold text-gray-700 mb-1">Selesai</label>
                             <input type="datetime-local" id="endDate" required class="block w-full px-3 py-2 bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-2 focus:ring-indigo-500 outline-none">
                         </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-medium text-slate-700 mb-1">Foto Event</label>
+                        <input name="eventPhoto" id="eventPhoto" type="file" class="w-full text-sm text-slate-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-indigo-50 file:text-indigo-700 hover:file:bg-indigo-100 transition">
                     </div>
 
                     <div class="flex justify-end gap-3 pt-2">
@@ -245,16 +286,20 @@
         const row = button.closest('tr');
         
         // Ambil data
-        const title = row.cells[1].innerText; 
-        const category = row.cells[2].innerText;
-        const fullDate = row.cells[3].innerText;
-        const status = row.cells[4].innerText.trim();
+        const title = row.cells[2].innerText; 
+        const location = row.cells[3].innerText;
+        const description = row.cells[4].innerText;
+        const category = row.cells[5].innerText;
+        const fullDate = row.cells[6].innerText;
+        const status = row.cells[7].innerText.trim();
 
         // Pecah tanggal
         const [start, end] = fullDate.split(' / ');
 
         // Masukin ke form
         document.getElementById('eventTitle').value = title;
+        document.getElementById('eventLocation').value = location;
+        document.getElementById('eventDescription').value = description;
         document.getElementById('eventCategory').value = category;
         document.getElementById('eventStatus').value = status;
         

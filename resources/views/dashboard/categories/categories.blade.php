@@ -27,9 +27,12 @@
                 </div>
 
                 <!-- Create Button -->
-                <button id="btnCreateCategory" class="px-4 py-2 bg-indigo-600 text-white rounded-base shadow hover:bg-indigo-700 text-sm font-medium transition-colors cursor-pointer">
-                Create
+                <button onclick="window.location='{{ route('categories.create') }}'"
+                    class="px-4 py-2 bg-brand text-black rounded-base shadow hover:bg-brand-dark text-sm">
+                    Create
                 </button>
+
+
 
             </div>
 
@@ -62,45 +65,41 @@
                     <th class="px-6 py-3 font-medium text-center">No</th>
                     <th class="px-6 py-3 font-medium">Nama</th>
 
+                    <!-- Tambahan kolom AKSI -->
                     <th class="px-6 py-3 font-medium text-center">Aksi</th>
                 </tr>
             </thead>
 
             <tbody>
 
-                <tr class="bg-neutral-primary-soft border-b border-default hover:bg-neutral-secondary-medium">
-                    <td class="px-6 py-4 text-center">1</td>
-                    <td class="px-6 py-4">Teknologi</td>
+                @foreach ($categories as $index => $category)
+                    <tr class="bg-neutral-primary-soft border-b border-default hover:bg-neutral-secondary-medium">
+                        <td class="px-6 py-4 text-center">{{ $index + 1 }}</td>
 
-                    <!-- Aksi -->
-                    <td class="px-6 py-4 text-center">
-                        <button onclick="openEditModal(this)" class="text-brand font-medium hover:underline mr-4">
-                            Update
-                        </button>
-                        <button class="text-red-600 font-medium hover:underline">Delete</button>
-                    </td>
-                </tr>
+                        <td class="px-6 py-4">{{ $category->name }}</td>
 
-                <tr class="bg-neutral-primary-soft border-b border-default hover:bg-neutral-secondary-medium">
-                    <td class="px-6 py-4 text-center">2</td>
-                    <td class="px-6 py-4">Politik</td>
+                        <!-- Aksi -->
+                        <td class="px-6 py-4 text-center">
+                            <a href="{{ route('categories.edit', $category->id) }}"
+                                class="text-brand font-medium hover:underline mr-4">
+                                Update
+                            </a>
 
-                    <!-- Aksi -->
-                    <td class="px-6 py-4 text-center">
-                        <button class="text-brand font-medium hover:underline mr-4">Update</button>
-                        <button class="text-red-600 font-medium hover:underline">Delete</button>
-                    </td>
-                </tr>
+                            <form action="{{ route('categories.destroy', $category->id) }}" method="POST"
+                                class="inline">
+                                @csrf
+                                @method('DELETE')
 
-                <tr class="bg-neutral-primary-soft hover:bg-neutral-secondary-medium">
-                    <td class="px-6 py-4 text-center">3</td>
-                    <td class="px-6 py-4">Olahraga</td>
+                                <button type="submit" class="text-red-600 font-medium hover:underline"
+                                    onclick="return confirm('Yakin hapus?')">
+                                    Delete
+                                </button>
+                            </form>
+                        </td>
+                    </tr>
+                @endforeach
 
-                    <!-- Aksi -->
-                    <td class="px-6 py-4 text-center">
-                        <button class="text-brand font-medium hover:underline mr-4">Update</button>
-                        <button class="text-red-600 font-medium hover:underline">Delete</button>
-                    </td>
+
                 </tr>
             </tbody>
         </table>
@@ -146,12 +145,6 @@
                             class="block w-full px-3 py-2 bg-gray-50 border border-gray-200 text-gray-500 text-sm rounded-lg cursor-not-allowed">
                     </div>
 
-                    <div>
-                        <label for="categoryDesc" class="block text-sm font-semibold text-gray-700 mb-1">Deskripsi Singkat</label>
-                        <textarea id="categoryDesc" rows="3" placeholder="Deskripsi kategori..." 
-                            class="block w-full px-3 py-2 bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-2 focus:ring-indigo-500 outline-none resize-none transition-all"></textarea>
-                    </div>
-
                     <div class="flex justify-end gap-3 pt-2">
                         <button type="button" id="btnCancelModal" class="px-5 py-2.5 bg-white border border-gray-300 text-gray-700 font-medium rounded-lg text-sm hover:bg-gray-50 transition-colors">Batal</button>
                         <button type="submit" class="px-5 py-2.5 bg-indigo-600 text-white font-medium rounded-lg hover:bg-indigo-700 shadow-lg shadow-indigo-500/30 text-sm transition-all">
@@ -194,7 +187,6 @@ document.addEventListener('DOMContentLoaded', function() {
     // Input Form
     const inputName     = document.getElementById('categoryName');
     const inputSlug     = document.getElementById('categorySlug');
-    const inputDesc     = document.getElementById('categoryDesc'); 
     const inputRowIndex = document.getElementById('editRowIndex');
     const modalTitle    = document.getElementById('modal-title');
 
@@ -271,10 +263,6 @@ document.addEventListener('DOMContentLoaded', function() {
         if(inputName) inputName.value = currentName;
         if(inputSlug) inputSlug.value = generateSlug(currentName);
         if(inputRowIndex) inputRowIndex.value = row.rowIndex; 
-        
-        // Kosongin desc (karena gak ada kolomnya)
-        if(inputDesc) inputDesc.value = ""; 
-
         if(modalTitle) modalTitle.innerText = "Edit Kategori";
         toggleModal();
     };
