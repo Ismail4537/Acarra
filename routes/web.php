@@ -7,7 +7,8 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\DashboardEventController;
 use App\Http\Controllers\DashboardUsersController;
 use App\Http\Controllers\DashboardCategoryController;
-            
+use App\Http\Controllers\ContacController;
+use App\Http\Controllers\ProfileController;
 
 Route::get('/', function () {
     return view('front-page.home', ["title" => "Home"]);
@@ -17,9 +18,11 @@ Route::get('/about', function () {
     return view('front-page.about', ["title" => "About"]);
 })->name('about');
 
-Route::get('/profile', function () {
-    return view('front-page.profile', ["title" => "Profile"]);
-})->name('profile');
+Route::get('/profile', [ProfileController::class, 'index'])->middleware('auth')->name('profile');
+Route::get('/profile/creator', [ProfileController::class, 'creator'])->middleware('auth')->name('profile.creator');
+
+Route::get('/contac', [ContacController::class, 'index'])->middleware('auth')->name('contac');
+Route::get('/contac/{id}', [ContacController::class, 'show'])->middleware('auth')->name('contac.show');
 
 // Rute untuk Index (event.index)
 Route::get('event', [EventController::class, 'index'])->name('event.index');
