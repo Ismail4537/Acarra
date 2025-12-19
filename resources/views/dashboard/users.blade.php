@@ -16,10 +16,6 @@
                     </div>
                     <input type="text" placeholder="Search" class="block w-full ps-9 pe-3 py-2 bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand shadow-xs">
                 </div>
-
-                <button onclick="openModal('modal-create')" class="px-4 py-2 bg-indigo-600 text-white rounded-lg shadow hover:bg-indigo-700 text-sm cursor-pointer transition">
-                    + Tambah User
-                </button>
             </div>
 
             <button id="dropdownDefaultButton" data-dropdown-toggle="dropdown" class="shrink-0 flex items-center text-body bg-neutral-secondary-medium border border-default-medium px-3 py-2 rounded-base hover:bg-neutral-tertiary-medium hover:text-heading text-sm">
@@ -77,34 +73,6 @@
                 <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z"/></svg>
             </div>
             <div class="ml-3 text-sm font-normal text-gray-800" id="toastMessage">Berhasil!</div>
-        </div>
-    </div>
-
-    <div id="modal-create" class="hidden fixed inset-0 z-50 flex justify-center items-center w-full h-full bg-slate-900/50 backdrop-blur-sm transition-all">
-        <div class="relative w-full max-w-lg bg-white rounded-xl shadow-2xl p-6 mx-4 border border-slate-200">
-            <div class="flex justify-between items-center mb-6 border-b border-slate-100 pb-4">
-                <h3 class="text-xl font-bold text-slate-800">Tambah User Baru</h3>
-                <button type="button" onclick="closeModal('modal-create')" class="text-slate-400 hover:text-red-500 font-bold text-2xl transition">&times;</button>
-            </div>
-            <form id="formCreateUser" class="space-y-4">
-                <div><label class="block text-sm font-medium text-slate-700 mb-1">Nama Lengkap</label><input type="text" id="create-name" required class="w-full border border-slate-300 rounded-lg px-4 py-2 outline-none text-slate-800"></div>
-                <div class="grid grid-cols-2 gap-4">
-                    <div><label class="block text-sm font-medium text-slate-700 mb-1">Email</label><input type="email" id="create-email" required class="w-full border border-slate-300 rounded-lg px-4 py-2 outline-none text-slate-800"></div>
-                    <div><label class="block text-sm font-medium text-slate-700 mb-1">No. Telepon</label><input type="text" id="create-phone" required class="w-full border border-slate-300 rounded-lg px-4 py-2 outline-none text-slate-800"></div>
-                </div>
-                <div class="grid grid-cols-2 gap-4">
-                    <div><label class="block text-sm font-medium text-slate-700 mb-1">Tanggal Lahir</label><input type="date" id="create-dob" class="w-full border border-slate-300 rounded-lg px-4 py-2 outline-none text-slate-800"></div>
-                    <div><label class="block text-sm font-medium text-slate-700 mb-1">Role</label>
-                        <select id="create-role" class="w-full border border-slate-300 rounded-lg px-4 py-2 outline-none bg-white text-slate-800"><option value="User">User</option><option value="Admin">Admin</option></select>
-                    </div>
-                </div>
-                <div><label class="block text-sm font-medium text-slate-700 mb-1">Foto Profil</label><input type="file" class="w-full text-sm text-slate-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-indigo-50 file:text-indigo-700 hover:file:bg-indigo-100 transition"></div>
-                
-                <div class="mt-8 flex justify-end gap-3 border-t border-slate-100 pt-4">
-                    <button type="button" onclick="closeModal('modal-create')" class="px-5 py-2.5 rounded-lg border border-slate-300 text-slate-700 hover:bg-slate-50 font-medium">Batal</button>
-                    <button type="submit" class="px-5 py-2.5 rounded-lg bg-indigo-600 text-white hover:bg-indigo-700 font-medium shadow-md">Simpan Data</button>
-                </div>
-            </form>
         </div>
     </div>
 
@@ -168,31 +136,6 @@
             document.getElementById('edit-role').value  = row.cells[6].innerText;
             openModal('modal-edit');
         };
-
-        // --- 2. LOGIC CREATE (Tambah Baris) ---
-        document.getElementById('formCreateUser').addEventListener('submit', function(e) {
-            e.preventDefault();
-            const name  = document.getElementById('create-name').value;
-            const email = document.getElementById('create-email').value;
-            const phone = document.getElementById('create-phone').value;
-            const dob   = document.getElementById('create-dob').value;
-            const role  = document.getElementById('create-role').value;
-            const no    = tableBody.rows.length + 1;
-
-            const newRow = `
-                <tr class="bg-neutral-primary-soft border-b border-default hover:bg-neutral-secondary-medium transition-colors">
-                    <td class="px-6 py-4 text-center">${no}</td><td class="px-6 py-4">${name}</td><td class="px-6 py-4">${email}</td>
-                    <td class="px-6 py-4">${phone}</td><td class="px-6 py-4">${dob || '-'}</td><td class="px-6 py-4">new.jpg</td><td class="px-6 py-4">${role}</td>
-                    <td class="px-6 py-4 text-center">
-                        <button onclick="openEditModal(this)" class="text-brand font-medium hover:underline mr-4">Update</button>
-                        <button class="text-red-600 font-medium hover:underline" onclick="this.closest('tr').remove()">Delete</button>
-                    </td>
-                </tr>`;
-            tableBody.insertAdjacentHTML('beforeend', newRow);
-            closeModal('modal-create');
-            this.reset();
-            showToast("User baru berhasil ditambah!");
-        });
 
         // --- 3. LOGIC UPDATE (Simpan Perubahan) ---
         document.getElementById('formEditUser').addEventListener('submit', function(e) {
