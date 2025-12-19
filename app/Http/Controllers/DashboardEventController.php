@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 
-class EventController extends Controller
+class DashboardEventController extends Controller
 {
     // Event data should be persisted externally (database or session).
     // Removed inline dummy data to keep controller clean.

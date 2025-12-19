@@ -4,9 +4,9 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\Auth\LoginController;
-use App\Http\Controllers\UserController;
-use App\Http\Controllers\CategoryController;
-use App\Http\Controllers\UsersController;
+use App\Http\Controllers\DashboardEventController;
+use App\Http\Controllers\DashboardUsersController;
+use App\Http\Controllers\DashboardCategoryController;
             
 
 Route::get('/', function () {
@@ -30,20 +30,20 @@ Route::get('/dashboard', function () {
     return view('dashboard.home');
 });
 
-Route::get('/dashboard/events', [EventController::class, 'adminIndex'])->name('dashboard.events.index');
-Route::get('/dashboard/events/create', [EventController::class, 'create'])->name('dashboard.events.create');
-Route::post('/dashboard/events', [EventController::class, 'store'])->name('dashboard.events.store');
-Route::get('/dashboard/events/{id}/edit', [EventController::class, 'edit'])->name('dashboard.events.edit');
-Route::put('/dashboard/events/{id}', [EventController::class, 'update'])->name('dashboard.events.update');
-Route::delete('/dashboard/events/{id}', [EventController::class, 'destroy'])->name('dashboard.events.destroy');
-Route::get('/dashboard/categories', [CategoryController::class, 'index'])->name('dashboard.categories');
+Route::get('/dashboard/events', [DashboardEventController::class, 'adminIndex'])->name('dashboard.events.index');
+Route::get('/dashboard/events/create', [DashboardEventController::class, 'create'])->name('dashboard.events.create');
+Route::post('/dashboard/events', [DashboardEventController::class, 'store'])->name('dashboard.events.store');
+Route::get('/dashboard/events/{id}/edit', [DashboardEventController::class, 'edit'])->name('dashboard.events.edit');
+Route::put('/dashboard/events/{id}', [DashboardEventController::class, 'update'])->name('dashboard.events.update');
+Route::delete('/dashboard/events/{id}', [DashboardEventController::class, 'destroy'])->name('dashboard.events.destroy');
+Route::get('/dashboard/categories', [DashboardCategoryController::class, 'index'])->name('dashboard.categories');
 
-Route::get('/dashboard/users', [UsersController::class, 'index'])->name('dashboard.users.index');
-Route::get('/dashboard/users/{id}/edit', [UsersController::class, 'edit'])->name('dashboard.users.edit');
-Route::put('/dashboard/users/{id}', [UsersController::class, 'update'])->name('dashboard.users.update');
-Route::delete('/dashboard/users/{id}', [UsersController::class, 'destroy'])->name('dashboard.users.destroy');
-Route::get('/dashboard/users/create', [UsersController::class, 'create'])->name('dashboard.users.create');
-Route::post('/dashboard/users', [UsersController::class, 'store'])->name('dashboard.users.store');
+Route::get('/dashboard/users', [DashboardUsersController::class, 'index'])->name('dashboard.users.index');
+Route::get('/dashboard/users/{id}/edit', [DashboardUsersController::class, 'edit'])->name('dashboard.users.edit');
+Route::put('/dashboard/users/{id}', [DashboardUsersController::class, 'update'])->name('dashboard.users.update');
+Route::delete('/dashboard/users/{id}', [DashboardUsersController::class, 'destroy'])->name('dashboard.users.destroy');
+Route::get('/dashboard/users/create', [DashboardUsersController::class, 'create'])->name('dashboard.users.create');
+Route::post('/dashboard/users', [DashboardUsersController::class, 'store'])->name('dashboard.users.store');
 
 Route::get('/login', [LoginController::class, 'create'])->name('login');
 Route::post('/login', [LoginController::class, 'store']);
@@ -52,7 +52,7 @@ Route::post('/logout', [LoginController::class, 'destroy'])->name('logout');
 Route::get('/register', [RegisteredUserController::class, 'create'])->name('register');
 Route::post('/register', [RegisteredUserController::class, 'store']);
 
-Route::resource('categories', CategoryController::class);
+Route::resource('categories', DashboardCategoryController::class);
 
 
 
