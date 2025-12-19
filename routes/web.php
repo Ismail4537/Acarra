@@ -36,7 +36,7 @@ Route::post('/dashboard/events', [EventController::class, 'store'])->name('dashb
 Route::get('/dashboard/events/{id}/edit', [EventController::class, 'edit'])->name('dashboard.events.edit');
 Route::put('/dashboard/events/{id}', [EventController::class, 'update'])->name('dashboard.events.update');
 Route::delete('/dashboard/events/{id}', [EventController::class, 'destroy'])->name('dashboard.events.destroy');
-Route::get('/dashboard/categories', [App\Http\Controllers\CategoryController::class, 'index'])->name('dashboard.categories');
+Route::get('/dashboard/categories', [CategoryController::class, 'index'])->name('dashboard.categories');
 
 Route::get('/dashboard/users', [UsersController::class, 'index'])->name('dashboard.users.index');
 Route::get('/dashboard/users/{id}/edit', [UsersController::class, 'edit'])->name('dashboard.users.edit');
@@ -45,13 +45,12 @@ Route::delete('/dashboard/users/{id}', [UsersController::class, 'destroy'])->nam
 Route::get('/dashboard/users/create', [UsersController::class, 'create'])->name('dashboard.users.create');
 Route::post('/dashboard/users', [UsersController::class, 'store'])->name('dashboard.users.store');
 
-Route::get('/login', function () {
-    return view('login');
-})->name('login');
+Route::get('/login', [LoginController::class, 'create'])->name('login');
+Route::post('/login', [LoginController::class, 'store']);
+Route::post('/logout', [LoginController::class, 'destroy'])->name('logout');
 
-Route::get('/register', function () {
-    return view('register');
-})->name('register');
+Route::get('/register', [RegisteredUserController::class, 'create'])->name('register');
+Route::post('/register', [RegisteredUserController::class, 'store']);
 
 Route::resource('categories', CategoryController::class);
 
