@@ -25,7 +25,7 @@
           <x-front-page.nav-link href="/register" :active="request()->is('register')">Sign Up</x-front-page.nav-link>
           @else
           {{-- Logged in user info --}}
-          <span class="text-gray-300 text-sm">Halo, {{ Auth::user()->name }}</span>
+          <a href="/ptofile" class="text-gray-300 text-sm">Halo, {{ Auth::user()->name }}</a>
           
           {{-- Logout button --}}
           <form action="{{ route('logout') }}" method="POST" class="inline">

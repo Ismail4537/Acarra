@@ -31,13 +31,13 @@ class RegisteredUserController extends Controller
         ]);
 
         // Create the user
-        $user = User::create([
+        User::create([
             'name' => $validated['username'], // Map username input to name field
             'email' => $validated['email'],
             'password' => Hash::make($validated['password']),
         ]);
 
         // Redirect to login page with success message
-        return redirect()->route('login')->with('success', 'Registrasi berhasil! Silakan login dengan akun Anda.');
+        return redirect(route('login'))->with('success', 'Registrasi berhasil! Silakan login dengan akun Anda.');
     }
 }
