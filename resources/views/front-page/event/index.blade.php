@@ -15,7 +15,7 @@
             </div>
         </div>
 
-    <div class="p-4 grid grid-cols-2 gap-4 justify-items-center md:grid-cols-3 lg:grid-cols-4 lg:gap-6.5"> 
+    <div class="p-4 grid grid-cols-[repeat(auto-fit,minmax(250px,1fr))] gap-4 justify-items-center">  
         @foreach ($listevent as $event)
         <a href="{{ route('event.show', ['slug' => $event['slug']]) }}">
         <div class="border border-gray-300 w-full max-w-xs bg-white rounded-xl shadow-lg overflow-hidden h-full flex flex-col">    
