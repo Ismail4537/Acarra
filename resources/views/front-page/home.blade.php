@@ -2,7 +2,7 @@
 <x-slot:title> {{$title}} </x-slot:title>
     {{-- Banner Section --}}
     <div class="relative flex items-center justify-center h-[350px] rounded-[10px] bg-center bg-no-repeat bg-cover overflow-hidden" 
-        style="background-image: url('../image/banner.png');">
+        style="background-image: url('https://images.unsplash.com/photo-1492684223066-81342ee5ff30?q=80&w=2070&auto=format&fit=crop');">
         
         <div class="absolute inset-0 bg-black/40"></div>
 
