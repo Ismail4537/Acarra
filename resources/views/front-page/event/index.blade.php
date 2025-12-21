@@ -11,8 +11,20 @@
                 <form action="{{ route('event.index') }}" method="GET" class="relative">
                     <input type="text" name="search" placeholder="Cari Event, Lokasi, atau Kategori..." class="w-full py-2 pl-10 pr-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" value="{{ request('search') }}">
                     <svg class="w-5 h-5 text-gray-400 absolute left-3 top-1/2 transform -translate-y-1/2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                    <select name="filter" id="filter" class="absolute right-0 top-0 h-full py-2 pr-3 border-l border-gray-300 bg-gray-100 rounded-r-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        <option align="center" value="title">Title</option>
+                        <option align="center" value="location">Location</option>
+                        <option align="center" value="price">Price</option>
+                    </select>
                 </form>
             </div>
+
+            <select name="filter" id="filter" class="right-0 top-0 h-full py-2 pr-3 border-l border-gray-300 bg-gray-100 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                <option align="center" value="">Kategori</option>
+                @foreach ($categories as $category)
+                    <option align="center" value="{{ $category->id }}">{{ $category->name }}</option>
+                @endforeach
+            </select>
         </div>
 
     <div class="p-4 grid grid-cols-2 gap-4 justify-items-center md:grid-cols-3 lg:grid-cols-4 lg:gap-6.5"> 
@@ -67,4 +79,45 @@
         </a>
         @endforeach
     </div>
+    {{-- pagination --}}
+@if($listevent->hasPages())
+    <div class="px-6 py-4 border-t border-gray-208">
+        <nav aria-label="Page navigation">
+            <ul class="flex-space-x-px text-sm">
+                {{-- Previous Button --}}
+                @if($listevent->onFirstPage())
+                    <li>
+                        <span class="flex items-center justify-center text-gray-400 bg-gray-108 box-border border border-gray-300 cursor-not-allowed font-medium rounded-s-base text-sm px-3 h-18">Previous</span>
+                    </li>
+                @else
+                    <li>
+                        <a href="{{ $listevent->previousPageUrl() }}" class="flex items-center justify-center text-body bg-neutral-secondary-medium box-border border border-default-medium hover:bg-neutral-tertiary-medium hover: text-heading font-medium rounded-s-base text-sm px-3 h-18 focus:outline-none">Previous</a>
+                    </li>
+                @endif
+                {{-- Page Numbers --}}
+                @foreach($listevent->getUrlRange (1, $listevent->lastPage()) as $page => $url)
+                    @if($page == $listevent->currentPage())
+                        <li>
+                            <a href="{{ $url}}" aria-current="page" class="flex items-center justify-center text-fg-brand bg-neutral-tertiary-medium box-border border border-default-medium hover: text-fg-brand font-medium text-sm w-10 h-10 focus:outline-none">{{ $page }}</a>
+                        </li>
+                    @else
+                        <li>
+                            <a href="{{ $url }}" class="flex items-center justify-center text-body bg-neutral-secondary-medium box-border border border-default-medium hover:bg-neutral-tertiary-medium hover: text-heading font-medium text-sm w-18 h-18 focus: outline-none"> {{ $page }}</a>
+                        </li>
+                    @endif
+                @endforeach
+                {{-- Next Button --}}
+                @if($listevent->hasMorePages())
+                    <li>
+                        <a href="{{ $listevent->nextPageUrl() }}" class="flex items-center justify-center text-body bg-neutral-secondary-medium box-border border border-default-medium hover:bg-neutral-tertiary-medium hover: text-heading font-medium rounded-e-base text-sm px-3 h-18 focus:outline-none">Next</a>
+                    </li>
+                @else
+                    <li>
+                        <span class="flex items-center justify-center text-gray-400 bg-gray-108 box-border border border-gray-300 cursor-not-allowed font-medium rounded-e-base text-sm px-3 h-16">Next</span>
+                    </li>
+                @endif
+            </ul>
+        </nav>
+    </div>
+@endif
 </x-front-page.layout>
