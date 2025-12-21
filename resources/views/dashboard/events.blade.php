@@ -1,10 +1,5 @@
-<header>
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
-    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-</header>
-
-<body>
-
+<x-back-page.layout>
+<x-slot:title> {{$title}} </x-slot:title>
     <div class="relative overflow-x-auto bg-neutral-primary-soft shadow-xs rounded-base border border-default">
         <!-- Search, Create, Filter -->
         <div class="p-4 flex items-center justify-between">
@@ -122,4 +117,4 @@
             <button class="border px-3 py-1 rounded hover:bg-neutral-secondary-medium">&gt;</button>
         </div>
     </div>
-</body>
+</x-back-page.layout>

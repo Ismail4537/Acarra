@@ -21,19 +21,19 @@ Route::get('event', [EventController::class, 'index'])->name('event.index');
 Route::get('event/{slug}', [EventController::class, 'show'])->name('event.show');
 
 Route::get('/dashboard', function () {
-    return view('dashboard.home');
+    return view('dashboard.home', ["title" => "Dashboard"]);
 });
 
-Route::get('/dashboard/events', function () {
-    return view('dashboard.events');
+Route::get('/events', function () {
+    return view('dashboard.events', ["title" => "Management Events"]);
 });
 
-Route::get('/dashboard/categories', function () {
-    return view('dashboard.categories');
+Route::get('/categories', function () {
+    return view('dashboard.categories', ["title" => "Management Categories"]);
 });
 
-Route::get('/dashboard/users', function () {
-    return view('dashboard.users');
+Route::get('/users', function () {
+    return view('dashboard.users', ["title" => "Management Users"]);
 });
 
 
