@@ -66,13 +66,13 @@
 
             <tbody>
 
-                @forelse ($events ?? [] as $index => $event)
+                @forelse ($listevent ?? [] as $index => $event)
                     <tr class="bg-neutral-primary-soft border-b border-default hover:bg-neutral-secondary-medium">
                         <td class="px-6 py-4 text-center">{{ $index + 1 }}</td>
-                        <td class="px-6 py-4">{{ $event['judul'] ?? '-' }}</td>
-                        <td class="px-6 py-4">{{ $event['kategori'] ?? '-' }}</td>
-                        <td class="px-6 py-4">{{ $event['tanggal'] ?? '-' }}</td>
-                        <td class="px-6 py-4">-</td>
+                        <td class="px-6 py-4">{{ $event['title'] ?? '-' }}</td>
+                        <td class="px-6 py-4">{{ $event['category']['name'] ?? '-' }}</td>
+                        <td class="px-6 py-4">{{ $event['start_date_time'] ?? '-' }} / {{ $event['end_date_time'] ?? '-' }}</td>
+                        <td class="px-6 py-4">{{ $event['status'] ?? '-' }}</td>
 
                         <!-- Aksi -->
                         <td class="px-6 py-4 text-center">
