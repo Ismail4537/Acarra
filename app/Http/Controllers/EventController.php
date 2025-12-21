@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Models\Event;
+use \App\Models\Category;
 
 class EventController extends Controller
 {
@@ -19,10 +20,10 @@ class EventController extends Controller
     {
         // Panggil prepareEventData untuk setiap item
         // $listevent = array_map([$this, 'prepareEventData'], $this->events);
-        $listevent = Event::with(['creator','category'])->get()->map(function ($event) {
-            return $this->prepareEventData($event);
-        });
-        return view('front-page.event.index', compact('listevent'), ['title' => 'List Event']);
+        $categories = Category::all();
+        $listevent = Event::with(['creator','category'])->get();
+        $listevent = Event::paginate(12)->withQueryString();
+        return view('front-page.event.index', ['listevent' => $listevent, 'categories' => $categories], ['title' => 'List Event']);
     }
 
     public function show($slug) // Menerima $slug, bukan $id

@@ -21,8 +21,8 @@ Route::get('/about', function () {
 Route::get('/profile', [ProfileController::class, 'index'])->middleware('auth')->name('profile');
 Route::get('/profile/creator', [ProfileController::class, 'creator'])->middleware('auth')->name('profile.creator');
 
-Route::get('/contac', [ContacController::class, 'index'])->middleware('auth')->name('contac');
-Route::get('/contac/{id}', [ContacController::class, 'show'])->middleware('auth')->name('contac.show');
+Route::get('/contac', [ContacController::class, 'index'])->name('contac');
+Route::get('/contac/{id}', [ContacController::class, 'show'])->name('contac.show');
 
 // Rute untuk Index (event.index)
 Route::get('event', [EventController::class, 'index'])->name('event.index');
