@@ -16,7 +16,7 @@
             </p>
 
             <div class="mt-8">
-                <a href="{{ route('event.index') }}" class="relative z-10 inline-block bg-[#3B82F6] text-white font-bold py-2.5 px-5 rounded-[5px] no-underline transition-colors duration-300 ease-in-out hover:bg-blue-600">
+                <a href="{{ route('event.index') }}" class="relative z-10 inline-block bg-blue-500 text-white font-bold py-2.5 px-5 rounded-[5px] no-underline transition-colors duration-300 ease-in-out hover:bg-blue-600">
                     Explore Events
                 </a>
             </div>
@@ -123,14 +123,14 @@
         <h1 class="text-2xl font-semibold text-gray-900 mb-4">Creator Pilihan</h1>
         <div class="px-2 grid grid-cols-[repeat(auto-fit,minmax(177px,1fr))]">
             {{-- Card Creator --}}
-            <a href="#" class="my-4 shrink-0 w-48 ">
+            <a href="/event" class="my-4 shrink-0 w-48 ">
                 <div class="p-2 flex flex-col items-center w-full max-w-xs rounded-xl overflow-hidden h-full">
                     <img src="{{ asset('../Image/Preview.jpg') }}" alt="gambar" class="w-35 h-35 rounded-full object-cover mb-4">
                     <h2 class="text-md font-medium text-gray-900 text-center">Nama Creator jawaaa apa adanya</h2>
                 </div>
             </a>
         </div>
-        <a href="#">
+        <a href="/contac">
             <button class="mt-6 mx-auto block px-6 py-2 bg-white font-medium border border-gray-200 shadow-sm hover:bg-gray-100 rounded-lg">
                 Load More Creator
             </button>
