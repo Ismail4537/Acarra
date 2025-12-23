@@ -13,14 +13,16 @@ return new class extends Migration
     {
         Schema::create('events', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained()->onDelete('cascade');
+            $table->foreignId('creator_id')->constrained('users')->onDelete('cascade');
             $table->foreignId('category_id')->constrained()->onDelete('cascade');
-            $table->string('title');
-            $table->string('slug')->unique();
+            $table->string('title', 50);
+            $table->string('slug', 255)->unique();
             $table->text('description');
             $table->dateTime('start_date_time');
             $table->dateTime('end_date_time');
             $table->string('location');
+            $table->string('image_path')->nullable();
+            $table->decimal('price', 10, 2)->default(0);
             $table->enum('status', ['scheduled', 'ongoing', 'completed', 'cancelled'])->default('scheduled');
             $table->timestamps();
         });
