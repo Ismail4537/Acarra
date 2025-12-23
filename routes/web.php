@@ -42,6 +42,7 @@ Route::get('/dashboard/events/{id}/edit', [DashboardEventController::class, 'edi
 Route::put('/dashboard/events/{id}', [DashboardEventController::class, 'update'])->middleware('isAdmin')->name('dashboard.events.update');
 Route::delete('/dashboard/events/{id}', [DashboardEventController::class, 'destroy'])->middleware('isAdmin')->name('dashboard.events.destroy');
 Route::get('/dashboard/categories', [DashboardCategoryController::class, 'index'])->middleware('isAdmin')->name('dashboard.categories');
+Route::get('/dashboard/categories/create', [DashboardCategoryController::class, 'create'])->middleware('isAdmin')->name('dashboard.categories.create');
 
 Route::get('/dashboard/users', [DashboardUsersController::class, 'index'])->middleware('isAdmin')->name('dashboard.users.index');
 Route::get('/dashboard/users/{id}/edit', [DashboardUsersController::class, 'edit'])->middleware('isAdmin')->name('dashboard.users.edit');
