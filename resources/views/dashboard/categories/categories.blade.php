@@ -99,12 +99,42 @@
             </tbody>
         </table>
 
-        <!-- PAGINATION -->
-        <div class="flex justify-end items-center space-x-2 px-4 py-4">
-            <button class="border px-3 py-1 rounded hover:bg-neutral-secondary-medium">&lt;</button>
-            <button class="border px-3 py-1 rounded bg-neutral-secondary-medium">1</button>
-            <button class="border px-3 py-1 rounded hover:bg-neutral-secondary-medium">2</button>
-            <button class="border px-3 py-1 rounded hover:bg-neutral-secondary-medium">&gt;</button>
-        </div>
+        @if($categories->hasPages())
+                <div class="flex flex-1 justify-between sm:justify-end gap-2">
+                    @if($categories->onFirstPage())
+                    <button
+                        class="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 transition">
+                        Previous
+                    </button>
+                    @else
+                    <a href="{{ $categories->previousPageUrl() }}"
+                        class="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 transition">
+                        Previous
+                    </a>
+                    @endif
+                    <div class="hidden md:flex gap-1">
+                        @foreach($categories->getUrlRange (1, $categories->lastPage()) as $page => $url)
+                        @if($page == $categories->currentPage())
+                            <a href="{{ $url}}"
+                            class="px-4 py-2 text-sm font-medium text-white bg-blue-500 border border-blue-500 rounded-lg">{{ $page }}</a>
+                        @else
+                            <a href="{{ $url}}"
+                            class="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-gray-50">{{ $page }}</a>
+                        @endif
+                        @endforeach
+                    </div>
+                    @if($categories->hasMorePages())
+                    <a href="{{ $categories->nextPageUrl() }}"
+                        class="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 transition">
+                        Next
+                    </a>
+                    @else
+                    <button
+                        class="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 transition">
+                        Next
+                    </button>
+                    @endif
+                </div>
+                @endif
     </div>
 </x-back-page.layout>

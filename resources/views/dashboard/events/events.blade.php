@@ -60,10 +60,10 @@
                                     @php
                                         $status = strtolower($event['status'] ?? 'draft');
                                         $statusClasses = [
-                                            'aktif' => 'bg-green-100 text-green-700',
-                                            'active' => 'bg-green-100 text-green-700',
-                                            'draft' => 'bg-yellow-100 text-yellow-700',
-                                            'selesai' => 'bg-gray-100 text-gray-700',
+                                            'scheduled' => 'bg-blue-100 text-blue-700',
+                                            'ongoing' => 'bg-green-100 text-green-700',
+                                            'completed' => 'bg-yellow-100 text-yellow-700',
+                                            'cancelled' => 'bg-red-100 text-red-700',
                                         ];
                                         $currentClass = $statusClasses[$status] ?? 'bg-blue-100 text-blue-700';
                                     @endphp
@@ -108,22 +108,43 @@
                     </p>
                 </div>
 
+                @if($listevent->hasPages())
                 <div class="flex flex-1 justify-between sm:justify-end gap-2">
+                    @if($listevent->onFirstPage())
                     <button
                         class="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 transition">
                         Previous
                     </button>
+                    @else
+                    <a href="{{ $listevent->previousPageUrl() }}"
+                        class="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 transition">
+                        Previous
+                    </a>
+                    @endif
                     <div class="hidden md:flex gap-1">
-                        <button
-                            class="px-4 py-2 text-sm font-medium text-white bg-blue-500 border border-blue-500 rounded-lg">1</button>
-                        <button
-                            class="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-gray-50">2</button>
+                        @foreach($listevent->getUrlRange (1, $listevent->lastPage()) as $page => $url)
+                        @if($page == $listevent->currentPage())
+                            <a href="{{ $url}}"
+                            class="px-4 py-2 text-sm font-medium text-white bg-blue-500 border border-blue-500 rounded-lg">{{ $page }}</a>
+                        @else
+                            <a href="{{ $url}}"
+                            class="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-gray-50">{{ $page }}</a>
+                        @endif
+                        @endforeach
                     </div>
+                    @if($listevent->hasMorePages())
+                    <a href="{{ $listevent->nextPageUrl() }}"
+                        class="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 transition">
+                        Next
+                    </a>
+                    @else
                     <button
                         class="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 transition">
                         Next
                     </button>
+                    @endif
                 </div>
+                @endif
             </div>
         </div>
     </div>
