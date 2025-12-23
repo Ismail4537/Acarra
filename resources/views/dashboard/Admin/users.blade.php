@@ -12,7 +12,7 @@
                                 d="m21 21-3.5-3.5M17 10a7 7 0 1 1-14 0 7 7 0 0 1 14 0Z" />
                         </svg>
                     </div>
-                    <input type="text" placeholder="Search"
+                    <input id="searchUsers" type="text" placeholder="Search"
                         class="block w-full ps-9 pe-3 py-2 bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand shadow-xs">
                 </div>
             </div>
@@ -81,3 +81,40 @@
         </div>
     </div>
 </x-back-page.layout>
+
+@push('scripts')
+    <script>
+        (function(){
+            function debounce(fn, delay){
+                let t;
+                return function(){
+                    const args = arguments;
+                    clearTimeout(t);
+                    t = setTimeout(function(){ fn.apply(null, args); }, delay);
+                }
+            }
+
+            const input = document.getElementById('searchUsers');
+            if(!input) return;
+            const table = document.querySelector('table');
+            if(!table) return;
+            const tbody = table.querySelector('tbody');
+
+            const fetchUrl = '{{ route('dashboard.users.search') }}';
+
+            const onSearch = debounce(function(e){
+                const q = (e.target.value || '').trim();
+                const url = fetchUrl + '?q=' + encodeURIComponent(q);
+                fetch(url, { headers: { 'X-Requested-With': 'XMLHttpRequest' } })
+                    .then(r => r.json())
+                    .then(data => {
+                        if(tbody && data.html !== undefined){
+                            tbody.innerHTML = data.html;
+                        }
+                    }).catch(()=>{});
+            }, 250);
+
+            input.addEventListener('input', onSearch);
+        })();
+    </script>
+@endpush
