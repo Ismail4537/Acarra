@@ -27,6 +27,8 @@ Route::get('/profile/edit', [ProfileController::class, 'edit'])->middleware('aut
 Route::put('/profile/update', [ProfileController::class, 'update'])->middleware('auth')->name('profile.update');
 
 Route::get('/contac', [ContacController::class, 'index'])->name('contac');
+// Live search (front) for contacts
+Route::get('/contac/search', [ContacController::class, 'search'])->name('contac.search');
 Route::get('/contac/{id}', [ContacController::class, 'show'])->name('contac.show');
 
 // Rute untuk Index (event.index)
