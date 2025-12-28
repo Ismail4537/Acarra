@@ -1,7 +1,6 @@
 <x-back-page.layout>
     <x-slot:title>Update User</x-slot:title>
 
-    {{-- Tombol Kembali --}}
     <a href="{{ route('dashboard.users.index') }}"
         class="inline-flex items-center gap-2 text-sm font-medium text-gray-600 hover:text-blue-600 transition-colors mb-4">
         <button type="button"
@@ -14,7 +13,6 @@
         </button>
     </a>
 
-    {{-- Form Update User --}}
     <form action="{{ route('dashboard.users.update', $user->id) }}" method="POST" enctype="multipart/form-data">
         @csrf
         @method('PUT')
@@ -22,7 +20,6 @@
         <div class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
             <div class="p-6 space-y-6">
 
-                {{-- 1. FOTO PROFIL (Fitur Baru) --}}
                 <div>
                     <label class="block text-sm font-semibold text-gray-700 mb-2">Foto Profil</label>
                     <div
@@ -61,7 +58,6 @@
                     </div>
                 </div>
 
-                {{-- 2. NAMA --}}
                 <div>
                     <label class="block text-sm font-semibold text-gray-700 mb-1">Nama</label>
                     <input type="text" name="name" value="{{ old('name', $user->name) }}" required
@@ -71,7 +67,6 @@
                     @enderror
                 </div>
 
-                {{-- 3. EMAIL --}}
                 <div>
                     <label class="block text-sm font-semibold text-gray-700 mb-1">Email</label>
                     <input type="email" name="email" value="{{ old('email', $user->email) }}" required
@@ -81,7 +76,6 @@
                     @enderror
                 </div>
 
-                {{-- Grid buat HP & Tanggal Lahir --}}
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                     {{-- 4. NO HP --}}
                     <div>
@@ -90,7 +84,6 @@
                             class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none text-sm shadow-sm transition">
                     </div>
 
-                    {{-- 5. TANGGAL LAHIR --}}
                     <div>
                         <label class="block text-sm font-semibold text-gray-700 mb-1">Tanggal Lahir</label>
                         <input type="date" name="birthdate" value="{{ old('birthdate', $user->birthdate) }}"
@@ -130,7 +123,6 @@
     </form>
 </x-back-page.layout>
 
-{{-- SCRIPT PREVIEW FOTO (Sama persis kayak create event) --}}
 <script>
     function previewFile() {
         const preview = document.getElementById('preview-image');
@@ -150,7 +142,6 @@
         if (file) {
             reader.readAsDataURL(file);
         } else {
-            // Kalau batal pilih file, jangan ilangin preview kalau sebelumnya udah ada foto
             if (preview.src === "" || preview.src === "#") {
                 preview.classList.add('hidden');
                 placeholder.classList.remove('hidden');
