@@ -142,10 +142,10 @@ unset($__errorArgs, $__bag); ?>
                             </div>
 
                             <div class="flex items-center justify-end gap-4 mt-10 pt-6 border-t border-gray-100">
-                                <button type="button"
+                                <a href="<?php echo e(route('profile')); ?>" type="button"
                                     class="px-6 py-3 rounded-lg text-base font-bold text-gray-500 hover:bg-gray-100 hover:text-gray-900 transition-colors">
                                     Batal
-                                </button>
+                                </a>
                                 <button type="submit"
                                     class="px-6 py-3 rounded-lg text-base font-bold text-white bg-blue-600 hover:bg-blue-700 shadow-lg shadow-blue-200 transform hover:-translate-y-0.5 transition-all">
                                     Simpan Perubahan

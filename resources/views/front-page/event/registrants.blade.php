@@ -76,7 +76,7 @@
                                                 @method('DELETE')
                                                 <button type="submit"
                                                     class="text-red-600 hover:text-red-800 text-sm font-semibold">
-                                                    Hapus
+                                                    Kick dari Event
                                                 </button>
                                             </form>
                                         @else

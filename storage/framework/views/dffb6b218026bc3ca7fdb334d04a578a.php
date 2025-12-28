@@ -143,7 +143,7 @@ unset($__errorArgs, $__bag); ?>
                         <div>
                             <label class="block text-sm font-bold text-gray-700 mb-2 ml-1">Harga Tiket (IDR)</label>
                             <input type="number" name="price" value="<?php echo e(old('price', $event->price ?? '')); ?>"
-                                placeholder="0 (Isi 0 jika gratis)"
+                                placeholder="0 (kosongkan jika gratis)"
                                 class="w-full rounded-xl border border-gray-300 px-5 py-3 text-gray-800 focus:border-blue-500 focus:ring-2 focus:ring-blue-100 outline-none transition-all shadow-sm font-medium">
                             <p class="text-xs text-gray-400 mt-1 ml-1">Masukkan angka saja (Contoh: 50000).</p>
                             <?php $__errorArgs = ['price'];
