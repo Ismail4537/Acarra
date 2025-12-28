@@ -174,7 +174,7 @@ if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>
                         <div>
-                            <label class="block text-sm font-bold text-gray-700 mb-2 ml-1">Thumbnail</label>
+                            <label class="block text-sm font-bold text-gray-700 mb-2 ml-1">Poster / Banner Event</label>
 
                             <label
                                 class="flex flex-col items-center justify-center w-full h-32 border-2 border-dashed border-gray-300 rounded-xl cursor-pointer bg-gray-50 hover:bg-blue-50 hover:border-blue-400 transition-all group">
